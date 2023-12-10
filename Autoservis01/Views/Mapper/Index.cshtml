@@ -1,0 +1,65 @@
+﻿@model List< Autoservis01.Models.MapperViewModel>
+
+@{
+    ViewData["Title"] = "Mapper Details";
+    var SuccessMessage = TempData["SuccessMessage"]?.ToString();
+    var ErrorMessage = TempData["ErrorMessage"]?.ToString();
+}
+<h3>@ViewData["Title"]</h3>
+<h3 />
+@if (!string.IsNullOrWhiteSpace(@SuccessMessage))
+{
+    <div class="alert alert-success">
+        <strong>Success!</strong>@SuccessMessage
+        <button type="button" class="btn-close float-end" data-bs-dismiss="alert"></button>
+    </div>
+
+}
+else if (!string.IsNullOrWhiteSpace(@ErrorMessage))
+{
+    <div class="alert alert-danger">
+        <strong>Error!</strong>@ErrorMessage
+        <button type="button" class="btn-close float-end" data-bs-dismiss="alert"></button>
+    </div>
+
+}
+<form>
+    <div class="table">
+        <table id="myTable" style="width:100%; border-collapse: collapse;" class="table table-responsive table-hover table-bordered table-sm">
+            <thead style="background-color:steelblue">
+                <tr class="table-active">
+                    <th style="border: 1px solid #ddd; padding: 5px;" class="text-center">Id</th>
+                    <th style="border: 1px solid #ddd; padding: 5px;" class="text-center">Brand</th>
+                    <th style="border: 1px solid #ddd; padding: 5px;" class="text-center">Model</th>
+                    <th style="border: 1px solid #ddd; padding: 5px;" class="text-center">Price</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model != null && Model.Any())
+                {
+                    @foreach (var mapper in Model)
+                    {
+                        <tr>
+                            <td style="border: 1px solid #ddd; padding: 5px; width: 20%;" class="text-center">@mapper.Id</td>
+                            <td style="border: 1px solid #ddd; padding: 5px; width: 50%;" class="text-center">@mapper.Brand</td>
+                            <td style="border: 1px solid #ddd; padding: 5px; width: 50%;" class="text-center">@mapper.Model</td>
+                            <td style="border: 1px solid #ddd; padding: 5px; width: 50%;" class="text-center">@mapper.Price</td>
+                        </tr>
+                    }
+                }
+                else
+                {
+                    <tr>
+                        <td colspan="6">
+                            <div>
+                                No Proizvodac available at this moment!
+                            </div>
+
+                        </td>
+
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</form>

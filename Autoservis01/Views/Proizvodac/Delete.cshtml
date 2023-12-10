@@ -1,0 +1,39 @@
+﻿@model Autoservis01.Models.ProizvodacViewModel
+
+@{
+    ViewData["Title"] = "Delete Proizvodac";
+    var ErrorMessage = TempData["ErrorMessage"]?.ToString();
+}
+<h3>@ViewData["Title"]</h3>
+<hr />
+@if (!string.IsNullOrWhiteSpace(@ErrorMessage))
+{
+    <div class="alert alert-danger">
+        <strong>Error!</strong>@ErrorMessage
+        <button type="button" class="btn-close float-end" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
+<form action="Delete" method="post" autocomplete="off">
+    <div class="mb-3">
+        <label class="form-label">Id</label>
+        <input type="text" class="form-control" asp-for="Id" readonly style="background-color:sandybrown" />
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Brand</label>
+        <input type="text" class="form-control" asp-for="Brand" readonly style="background-color:sandybrown" />
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Model</label>
+        <input type="text" class="form-control" asp-for="Model" readonly style="background-color:sandybrown" />
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Price</label>
+        <div class="input-group">
+            <span class="input-group-text">&euro;</span>
+            <input type="number" class="form-control" asp-for="Price" readonly style="background-color:sandybrown" />
+        </div>
+    </div>
+    <div class="d-grid">
+        <button type="submit" class="btn btn-danger" onclick="return function ('Are you sure to delete proizvodac :@Model.Brand')">Delete</button>
+    </div>
+</form>

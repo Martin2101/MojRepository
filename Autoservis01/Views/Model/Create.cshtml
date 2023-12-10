@@ -1,0 +1,41 @@
+﻿@model Autoservis01.Models.ModelViewModel
+
+@{
+    ViewData["Title"] = "Create Model";
+    var ErrorMessage = TempData["ErrorMessage"]?.ToString();
+}
+<h3>@ViewData["Title"]</h3>
+<hr />
+@if (!string.IsNullOrWhiteSpace(@ErrorMessage))
+{
+    <div class="alert alert-danger">
+        <strong>Error!</strong>@ErrorMessage
+        <button type="button" class="btn-close float-end" data-bs-dismiss="alert"></button>
+    </div>
+
+}
+<form action="Create" method="post" autocomplete="off">
+    <div class="mb-2">
+        <label class="form-label">MakeId</label>
+        <input type="number" class="form-control" asp-for="MakeId" style="background-color:lightgreen" autofocus />
+        <span asp-validation-for="MakeId" class="text-danger"></span>
+    </div>
+    <div class="mb-2">
+        <label class="form-label">Brand</label>
+        <input type="text" class="form-control" asp-for="Brand" style="background-color:lightgreen" />
+        <span asp-validation-for="Brand" class="text-danger"></span>
+    </div>
+    <div class="mb-2">
+        <label class="form-label">Series</label>
+        <input type="text" class="form-control" asp-for="Series" style="background-color:lightgreen" />
+        <span asp-validation-for="Series" class="text-danger"></span>
+    </div>
+    <div class="d-grid">
+        <button type="Submit" class="btn btn-primary">Submit</button>
+    </div>
+</form>
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

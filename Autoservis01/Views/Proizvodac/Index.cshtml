@@ -1,0 +1,73 @@
+﻿@model List< Autoservis01.Models.ProizvodacViewModel>
+
+@{
+    ViewData["Title"] = "Proizvodac Details";
+    var SuccessMessage = TempData["SuccessMessage"]?.ToString();
+    var ErrorMessage = TempData["ErrorMessage"]?.ToString();
+}
+<h3>@ViewData["Title"]</h3>
+<h3 />
+@if (!string.IsNullOrWhiteSpace(@SuccessMessage))
+{
+    <div class="alert alert-success">
+        <strong>Success!</strong>@SuccessMessage
+        <button type="button" class="btn-close float-end" data-bs-dismiss="alert"></button>
+    </div>
+
+}
+else if (!string.IsNullOrWhiteSpace(@ErrorMessage))
+{
+    <div class="alert alert-danger">
+        <strong>Error!</strong>@ErrorMessage
+        <button type="button" class="btn-close float-end" data-bs-dismiss="alert"></button>
+    </div>
+
+}
+<form>
+    <button asp-action="Create" asp-controller="Proizvodac" class="btn btn-primary mb-3">Create Proizvodac</button>
+    <div class="table">
+        <table id="myTable" style="width:100%; border-collapse: collapse;" class="table table-responsive table-hover table-bordered table-sm">
+            <thead style="background-color:steelblue">
+                <tr class="table-active">
+                    <th style="border: 1px solid #ddd; padding: 5px;" class="text-center">Id</th>
+                    <th style="border: 1px solid #ddd; padding: 5px;" class="text-center">Brand</th>
+                    <th style="border: 1px solid #ddd; padding: 5px;" class="text-center">Model</th>
+                    <th style="border: 1px solid #ddd; padding: 5px;" class="text-center">Price</th>
+                    <th style="border: 1px solid #ddd; padding: 5px;" class="text-center">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model != null && Model.Any())
+                {
+                    @foreach (var proizvodac in Model)
+                    {
+                        <tr>
+                            <td style="border: 1px solid #ddd; padding: 5px; width: 10%;" class="text-center">@proizvodac.Id</td>
+                            <td style="border: 1px solid #ddd; padding: 5px; width: 20%;" class="text-center">@proizvodac.Brand</td>
+                            <td style="border: 1px solid #ddd; padding: 5px; width: 30%;" class="text-center">@proizvodac.Model</td>
+                            <td style="border: 1px solid #ddd; padding: 5px; width: 30%;" class="text-center">@proizvodac.Price</td>
+                            <td style="border: 1px solid #ddd; padding: 5px; width: 50%;" class="text-center">
+                                <div class=" btn-group  btn-group-sm">
+                                    <a class="text-center" asp-controller="Proizvodac" asp-action="Edit" asp-route-id="@proizvodac.Id" class="btn btn-primary">Edit </a> I
+                                    <a class="text-center" asp-controller="Proizvodac" asp-action="Delete" asp-route-id="@proizvodac.Id" class="btn btn-danger">Delete</a>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                }
+                else
+                {
+                    <tr>
+                        <td colspan="6">
+                            <div>
+                                No Proizvodac available at this moment!
+                            </div>
+
+                        </td>
+
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</form>
